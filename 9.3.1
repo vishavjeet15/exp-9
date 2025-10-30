@@ -1,0 +1,34 @@
+-- Assuming GRADES table structure:
+-- CREATE TABLE Grades (
+--   student_id NUMBER PRIMARY KEY,
+--   student_name VARCHAR2(100),
+--   marks NUMBER,
+--   grade CHAR(1)
+-- );
+
+CREATE OR REPLACE PROCEDURE CalculateAndInsertGrades AS
+BEGIN
+  FOR rec IN (SELECT student_id, student_name, marks FROM STUDENT) LOOP
+    DECLARE
+      v_grade CHAR(1);
+    BEGIN
+      IF rec.marks >= 90 THEN
+        v_grade := 'A';
+      ELSIF rec.marks >= 80 THEN
+        v_grade := 'B';
+      ELSIF rec.marks >= 70 THEN
+        v_grade := 'C';
+      ELSIF rec.marks >= 60 THEN
+        v_grade := 'D';
+      ELSE
+        v_grade := 'F';
+      END IF;
+
+      -- Insert into Grades table
+      INSERT INTO Grades (student_id, student_name, marks, grade)
+      VALUES (rec.student_id, rec.student_name, rec.marks, v_grade);
+    END;
+  END LOOP;
+  COMMIT;
+END CalculateAndInsertGrades;
+/
