@@ -1,0 +1,10 @@
+BEGIN
+  FOR rec IN (
+    SELECT subject, ROUND(AVG(marks), 2) AS avg_marks
+    FROM Results
+    GROUP BY subject
+    HAVING AVG(marks) < 80
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE('Subject: ' || rec.subject || ', Average Marks: ' || rec.avg_marks);
+  END LOOP;
+END;
