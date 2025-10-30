@@ -1,0 +1,31 @@
+-- 1. Create the Results table
+CREATE TABLE Results (
+  student_id NUMBER,
+  student_name VARCHAR2(100),
+  subject_name VARCHAR2(100),
+  marks NUMBER
+);
+
+-- 2. Insert the given student records into Results
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (1, 'Ravi', 'Math', 85);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (2, 'Priya', 'Science', 72);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (3, 'Kiran', 'English', -5);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (4, 'Sneha', 'Math', 95);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (5, 'Arjun', 'Science', 105);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (6, 'Meena', 'English', 41);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (7, 'Rahul', 'Math', 60);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (8, 'Divya', 'Science', 33);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (9, 'Vikram', 'English', 55);
+INSERT INTO Results (student_id, student_name, subject_name, marks) VALUES (10, 'Riya', 'Math', 18);
+
+COMMIT;
+
+-- 3. Create an index on the marks column to optimize queries filtering or ordering by marks
+CREATE INDEX idx_results_marks ON Results (marks);
+
+-- 4. Query to display students within a marks range and ordered by marks ascending
+-- Example: find students with marks between 30 and 90
+SELECT student_id, student_name, subject_name, marks
+FROM Results
+WHERE marks BETWEEN 30 AND 90
+ORDER BY marks ASC;
