@@ -1,0 +1,8 @@
+SELECT subject, name, marks
+FROM (
+  SELECT r.subject, s.name, r.marks,
+         RANK() OVER (PARTITION BY r.subject ORDER BY r.marks DESC) as rank
+  FROM Results r
+  JOIN Students s ON r.student_id = s.student_id
+) 
+WHERE rank = 1;
