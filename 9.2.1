@@ -1,0 +1,14 @@
+-- Assuming the subject name is provided in a variable :input_subject
+DECLARE
+  input_subject VARCHAR2(50) := 'DBMS';  -- example input
+  avg_marks NUMBER;
+BEGIN
+  -- Convert input subject to uppercase and calculate average marks for that subject
+  SELECT ROUND(AVG(marks), 2)
+  INTO avg_marks
+  FROM Results
+  WHERE UPPER(subject) = UPPER(input_subject);
+
+  -- Display the average marks
+  DBMS_OUTPUT.PUT_LINE('Average marks in ' || input_subject || ': ' || avg_marks);
+END;
